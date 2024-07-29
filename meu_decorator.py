@@ -1,19 +1,13 @@
-import requests
-import time
+def decorator(func):
+    def wraper(nome):
+        nome = "".join(reversed(nome))
+        result = func(nome)
+        result = result.upper()
+        return result
+    return wraper
 
-def calcular_tempo(funcao):
-    def wrapper():
-        tempo_inicial = time.time()
-        funcao()
-        tempo_final = time.time()
-        print(f"Dutação foi de {tempo_final-tempo_inicial} segundos")
-    return wrapper
+@decorator
+def meu_nome(nome):
+    return f"Meu nome é {nome}"
 
-@calcular_tempo
-def pegar_cotacao_dolar():
-    link = f"https://economia.awesomeapi.com.br/last/USD-BRL"
-    requisicao = requests.get(link)
-    requisicao = requisicao.json()
-    print(requisicao['USDBRL']['bid'])
-
-pegar_cotacao_dolar()
+print(meu_nome("Daniel"))

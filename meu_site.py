@@ -2,7 +2,6 @@ from flask import Flask
 
 app = Flask(__name__)
 
-
 @app.route('/home')
 def homepage():
     # retornar a imagem "segue_o_lider.png" da pasta "static"
